@@ -1,0 +1,39 @@
+[1] You can never create a object or array of a parameterized Type
+
+public class Foo<T> {
+    private T myField;
+    private T[] myArray;
+
+    public Foo(T param) {
+        myField = new T(); //Error
+        myArray = new T[10]; //Error
+    }
+}
+
+but you can do,
+
+public class Foo<T> {
+    private T myField;
+    private T[] myArray;
+
+    public Foo(T param) {
+        myField = param;
+        T[] a2 = (T[]) (new object[10]); // Create arrays by casting object[]
+    }
+}
+
+[2] Comparable great example for Generic Type
+
+public interface Comparable<T> {
+    public int compareTo(T obj);
+}
+
+[3] When we want just one method to be generic, precede its return type by generic
+
+public static <T> void copy(List<T> src, List<T> dest) {
+    for(T t : src) {
+        dest.add(t);
+    }
+}
+
+[4] Unbounded(? or ? extends Object), Bounded(? extends T), Lower Bound Wildcards(? super T)
